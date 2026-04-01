@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
+import { useToast } from '../context/ToastContext';
+import ConfirmModal from '../components/ConfirmModal';
 
 const Applications = () => {
   const { token } = useAuth();
   const [applications, setApplications] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
+  const { showToast } = useToast();
+  const [confirmDelete, setConfirmDelete] = useState(null);
   const [search, setSearch] = useState('');
   const [filterStatus, setFilterStatus] = useState('All');
   const [form, setForm] = useState({
@@ -29,40 +33,47 @@ const Applications = () => {
 
   useEffect(() => { fetchApplications(); }, []);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      await axios.post('http://localhost:5000/api/applications', form, { headers });
-      setShowForm(false);
-      setForm({
-        company: '', role: '', type: 'Intern', cgpaCutoff: '',
-        status: 'Applied', notes: '', stipend: '',
-        rounds: [{ roundName: '', result: 'Pending' }]
-      });
-      fetchApplications();
-    } catch (err) {
-      console.error(err);
-    }
-  };
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  try {
+    await axios.post('http://localhost:5000/api/applications', form, { headers });
+    showToast('Application added successfully!', 'success');
+    setShowForm(false);
+    setForm({
+      company: '', role: '', type: 'Intern', cgpaCutoff: '',
+      status: 'Applied', notes: '', stipend: '',
+      rounds: [{ roundName: '', result: 'Pending' }]
+    });
+    fetchApplications();
+  } catch (err) {
+    showToast('Failed to add application!', 'error');
+  }
+};
 
-  const handleDelete = async (id) => {
-    if (!window.confirm('Delete this application?')) return;
-    try {
-      await axios.delete(`http://localhost:5000/api/applications/${id}`, { headers });
-      fetchApplications();
-    } catch (err) {
-      console.error(err);
-    }
-  };
+const handleDelete = (id) => {
+  setConfirmDelete(id);
+};
 
-  const handleStatusChange = async (id, status) => {
-    try {
-      await axios.put(`http://localhost:5000/api/applications/${id}`, { status }, { headers });
-      fetchApplications();
-    } catch (err) {
-      console.error(err);
-    }
-  };
+const confirmDeleteApp = async () => {
+  try {
+    await axios.delete(`http://localhost:5000/api/applications/${confirmDelete}`, { headers });
+    showToast('Application deleted!', 'success');
+    setConfirmDelete(null);
+    fetchApplications();
+  } catch (err) {
+    showToast('Failed to delete!', 'error');
+  }
+};
+
+const handleStatusChange = async (id, status) => {
+  try {
+    await axios.put(`http://localhost:5000/api/applications/${id}`, { status }, { headers });
+    showToast('Status updated!', 'success');
+    fetchApplications();
+  } catch (err) {
+    showToast('Failed to update!', 'error');
+  }
+};
 
   const addRound = () => {
     setForm({ ...form, rounds: [...form.rounds, { roundName: '', result: 'Pending' }] });
@@ -306,7 +317,15 @@ const Applications = () => {
           ))}
         </div>
       )}
+      {confirmDelete && (
+  <ConfirmModal
+    message="This will permanently delete this application."
+    onConfirm={confirmDeleteApp}
+    onCancel={() => setConfirmDelete(null)}
+  />
+)}
     </div>
+    
   );
 };
 

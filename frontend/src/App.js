@@ -8,6 +8,7 @@ import Applications from './pages/Applications';
 import Navbar from './components/Navbar';
 import Profile from './pages/Profile';
 import Reminders from './pages/Reminders';
+import { ToastProvider } from './context/ToastContext';
 
 const PrivateRoute = ({ children }) => {
   const { token } = useAuth();
@@ -35,13 +36,16 @@ function AppRoutes() {
 function App() {
   return (
     <AuthProvider>
+      <ToastProvider>
       <Router>
         <div className="min-h-screen bg-gray-50">
           <AppRoutes />
         </div>
       </Router>
+      </ToastProvider>
     </AuthProvider>
   );
 }
+
 
 export default App;

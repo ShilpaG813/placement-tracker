@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
+import { useToast } from '../context/ToastContext';
+import ConfirmModal from '../components/ConfirmModal';
 
 const Reminders = () => {
   const { token } = useAuth();
@@ -8,6 +10,8 @@ const Reminders = () => {
   const [showForm, setShowForm] = useState(false);
   const [loading, setLoading] = useState(true);
   const [editId, setEditId] = useState(null);
+  const { showToast } = useToast();
+const [confirmDelete, setConfirmDelete] = useState(null);
 const [editForm, setEditForm] = useState({
   company: '', role: '', roundType: '', interviewDate: '', notes: ''
 });
@@ -33,6 +37,7 @@ const [editForm, setEditForm] = useState({
     e.preventDefault();
     try {
       await axios.post('http://localhost:5000/api/reminders', form, { headers });
+      showToast('Reminder added!', 'success');
       setShowForm(false);
       setForm({ company: '', role: '', roundType: '', interviewDate: '', notes: '' });
       fetchReminders();
@@ -41,15 +46,20 @@ const [editForm, setEditForm] = useState({
     }
   };
 
-  const handleDelete = async (id) => {
-    if (!window.confirm('Delete this reminder?')) return;
-    try {
-      await axios.delete('http://localhost:5000/api/reminders/' + id, { headers });
-      fetchReminders();
-    } catch (err) {
-      console.error(err);
-    }
-  };
+const handleDelete = (id) => {
+  setConfirmDelete(id);
+};
+
+const confirmDeleteReminder = async () => {
+  try {
+    await axios.delete('http://localhost:5000/api/reminders/' + confirmDelete, { headers });
+    showToast('Reminder deleted!', 'success');
+    setConfirmDelete(null);
+    fetchReminders();
+  } catch (err) {
+    showToast('Failed to delete!', 'error');
+  }
+};
 
   const getDaysLeft = (date) => {
   const today = new Date();
@@ -359,6 +369,13 @@ const handleUpdate = async (e) => {
           )}
         </div>
       )}
+      {confirmDelete && (
+  <ConfirmModal
+    message="This will permanently delete this reminder."
+    onConfirm={confirmDeleteReminder}
+    onCancel={() => setConfirmDelete(null)}
+  />
+  )}
     </div>
   );
 };

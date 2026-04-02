@@ -1,33 +1,44 @@
-# 🎯 Placement Tracker
+# 🎯 Smart Placement Tracker
 
-A full-stack web application to help students track their placement journey — manage job applications, set reminders, and monitor progress all in one place.
+A full-stack web application built for engineering students to manage their entire placement journey — track applications, get smart email reminders, and analyze performance through an analytics dashboard.
 
-## 🚀 Features
+## 🌐 Live Demo
+🔗 [placement-tracker.vercel.app](https://placement-tracker.vercel.app) 
 
-- 🔐 **User Authentication** — Secure login and registration
-- 📋 **Track Job Applications** — Add, update, and manage all your job applications
-- ⏰ **Reminders** — Set reminders for interviews, deadlines, and follow-ups
-- 📊 **Dashboard** — Visual stats and overview of your placement progress
-- 👤 **Profile Management** — Manage your personal profile
+## ✨ Features
+
+- 🔐 **JWT Authentication** — Secure register/login with token-based auth
+- 📋 **Application Tracker** — Add, update, filter and manage all job applications with round-wise tracking
+- 📊 **Analytics Dashboard** — Visual charts showing success rate, rejection rate, company-wise stats and smart insights
+- 🔔 **Smart Email Reminders** — Automated 3-stage email alerts (1 day before, 2 hours before, 30 mins before) using NodeMailer + Cron Jobs
+- 👤 **Profile Management** — Edit profile, skills, CGPA and resume link
+- 🔍 **Search & Filter** — Filter applications by status and search by company/role
 
 ## 🛠️ Tech Stack
 
-**Frontend:**
-- React.js
-- Tailwind CSS
+| Layer | Technology |
+|-------|-----------|
+| Frontend | React.js, Tailwind CSS, Recharts |
+| Backend | Node.js, Express.js |
+| Database | MongoDB Atlas, Mongoose |
+| Auth | JWT, Bcrypt |
+| Email | NodeMailer, Node-Cron |
+| Deployment | Vercel (Frontend), Render (Backend) |
 
-**Backend:**
-- Node.js
-- Express.js
+## 📸 Screenshots
 
-**Database:**
-- MongoDB
+> Dashboard with analytics
+> Applications tracker
+> Interview reminders
+
+*(Add screenshots after deployment)*
 
 ## ⚙️ Getting Started
 
 ### Prerequisites
-- Node.js installed
-- MongoDB connection (Atlas or local)
+- Node.js v18+
+- MongoDB Atlas account
+- Gmail account with App Password enabled
 
 ### Installation
 
@@ -43,17 +54,19 @@ cd backend
 npm install
 ```
 
-3. **Setup Frontend**
+3. **Create `.env` file in backend folder**
+```
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret_key
+PORT=5000
+EMAIL_USER=your_gmail@gmail.com
+EMAIL_PASS=your_gmail_app_password
+```
+
+4. **Setup Frontend**
 ```bash
 cd frontend
 npm install
-```
-
-4. **Create a `.env` file in the backend folder:**
-```
-MONGO_URI=your_mongodb_connection_string
-JWT_SECRET=your_jwt_secret
-PORT=5000
 ```
 
 5. **Run the app**
@@ -61,7 +74,7 @@ PORT=5000
 Backend:
 ```bash
 cd backend
-npm start
+node server.js
 ```
 
 Frontend:
@@ -72,3 +85,27 @@ npm start
 
 App runs on `http://localhost:3000`
 
+## 📁 Project Structure
+```
+placement-tracker/
+├── backend/
+│   ├── models/          # MongoDB schemas
+│   ├── routes/          # API routes
+│   ├── middleware/      # Auth middleware
+│   ├── utils/           # Email & cron job services
+│   └── server.js
+├── frontend/
+│   ├── src/
+│   │   ├── components/  # Reusable components
+│   │   ├── pages/       # Page components
+│   │   └── context/     # Auth & Toast context
+```
+
+## 🔮 Upcoming Features
+- 🤖 AI Mock Interview Assistant
+- 📈 CGPA Eligibility Checker
+- 🏆 Interview Experience Feed
+
+## 👩‍💻 Author
+**Shilpa G**
+[LinkedIn](https://linkedin.com/in/shilpa-g813) | [GitHub](https://github.com/ShilpaG813)

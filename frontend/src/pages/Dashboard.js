@@ -16,7 +16,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/api/applications', {
+        const res = await axios.get('https://placement-tracker-backend-76cz.onrender.com/api/applications', {
           headers: { Authorization: `Bearer ${token}` }
         });
         setApplications(res.data);

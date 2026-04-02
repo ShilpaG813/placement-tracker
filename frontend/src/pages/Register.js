@@ -22,7 +22,7 @@ const Register = () => {
         cgpa: parseFloat(form.cgpa),
         skills: form.skills.split(',').map(s => s.trim())
       };
-      const res = await axios.post('http://localhost:5000/api/auth/register', payload);
+      const res = await axios.post('https://placement-tracker-backend-76cz.onrender.com/api/auth/register', payload);
       login(res.data.user, res.data.token);
       navigate('/dashboard');
     } catch (err) {

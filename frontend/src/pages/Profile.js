@@ -17,7 +17,7 @@ const Profile = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/api/profile', { headers });
+        const res = await axios.get('https://placement-tracker-backend-76cz.onrender.com/api/profile', { headers });
         setProfileData(res.data);
         setForm({
           name: res.data.name || '',
@@ -43,7 +43,7 @@ const Profile = () => {
         skills: form.skills.split(',').map(function(s) { return s.trim(); }).filter(Boolean),
         resume: form.resume
       };
-      const res = await axios.put('http://localhost:5000/api/profile', payload, { headers });
+      const res = await axios.put('https://placement-tracker-backend-76cz.onrender.com/api/profile', payload, { headers });
       setProfileData(res.data);
       login({ ...user, name: res.data.name }, token);
       setEditing(false);

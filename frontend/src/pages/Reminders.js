@@ -23,7 +23,7 @@ const [editForm, setEditForm] = useState({
 
   const fetchReminders = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/reminders', { headers });
+      const res = await axios.get('https://placement-tracker-backend-76cz.onrender.com/api/reminders', { headers });
       setReminders(res.data);
     } catch (err) {
       console.error(err);
@@ -36,7 +36,7 @@ const [editForm, setEditForm] = useState({
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:5000/api/reminders', form, { headers });
+      await axios.post('https://placement-tracker-backend-76cz.onrender.com/api/reminders', form, { headers });
       showToast('Reminder added!', 'success');
       setShowForm(false);
       setForm({ company: '', role: '', roundType: '', interviewDate: '', notes: '' });
@@ -52,7 +52,7 @@ const handleDelete = (id) => {
 
 const confirmDeleteReminder = async () => {
   try {
-    await axios.delete('http://localhost:5000/api/reminders/' + confirmDelete, { headers });
+    await axios.delete('https://placement-tracker-backend-76cz.onrender.com/api/reminders/' + confirmDelete, { headers });
     showToast('Reminder deleted!', 'success');
     setConfirmDelete(null);
     fetchReminders();
@@ -108,7 +108,7 @@ const past = reminders.filter(r => new Date(r.interviewDate) <= new Date());
 const handleUpdate = async (e) => {
   e.preventDefault();
   try {
-    await axios.put('http://localhost:5000/api/reminders/' + editId, editForm, { headers });
+    await axios.put('https://placement-tracker-backend-76cz.onrender.com/api/reminders/' + editId, editForm, { headers });
     setEditId(null);
     fetchReminders();
   } catch (err) {

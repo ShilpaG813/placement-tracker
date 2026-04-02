@@ -23,7 +23,7 @@ const Applications = () => {
 
   const fetchApplications = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/applications', { headers });
+      const res = await axios.get('https://placement-tracker-backend-76cz.onrender.com/api/applications', { headers });
       setApplications(res.data);
     } catch (err) {
       console.error(err);
@@ -36,7 +36,7 @@ const Applications = () => {
 const handleSubmit = async (e) => {
   e.preventDefault();
   try {
-    await axios.post('http://localhost:5000/api/applications', form, { headers });
+    await axios.post('https://placement-tracker-backend-76cz.onrender.com/api/applications', form, { headers });
     showToast('Application added successfully!', 'success');
     setShowForm(false);
     setForm({
@@ -56,7 +56,7 @@ const handleDelete = (id) => {
 
 const confirmDeleteApp = async () => {
   try {
-    await axios.delete(`http://localhost:5000/api/applications/${confirmDelete}`, { headers });
+    await axios.delete(`https://placement-tracker-backend-76cz.onrender.com/api/applications/${confirmDelete}`, { headers });
     showToast('Application deleted!', 'success');
     setConfirmDelete(null);
     fetchApplications();
@@ -67,7 +67,7 @@ const confirmDeleteApp = async () => {
 
 const handleStatusChange = async (id, status) => {
   try {
-    await axios.put(`http://localhost:5000/api/applications/${id}`, { status }, { headers });
+    await axios.put(`https://placement-tracker-backend-76cz.onrender.com/api/applications/${id}`, { status }, { headers });
     showToast('Status updated!', 'success');
     fetchApplications();
   } catch (err) {

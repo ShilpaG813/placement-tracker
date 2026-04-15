@@ -20,6 +20,21 @@ A full-stack web application built for engineering students to manage their enti
 4. View upcoming and past interviews
 5. Edit or delete reminders anytime
 
+
+## 📸 Screenshots
+
+### 🔐 Login Page
+![Login](./frontend/screenshots/login.png)
+
+### 📊 Dashboard
+Track your applications and progress visually  
+![Dashboard](./frontend/screenshots/dashboard.png)
+
+### ⏰ Reminders
+Manage and track your upcoming interviews  
+![Reminders](./frontend/screenshots/reminders.png)
+
+
 ## 🛠️ Tech Stack
 
 | Layer | Technology |
@@ -30,12 +45,6 @@ A full-stack web application built for engineering students to manage their enti
 | Auth | JWT, Bcrypt |
 | Deployment | Vercel (Frontend), Render (Backend) |
 
-## 📸 Screenshots
-
-> Dashboard with analytics
-> Applications tracker
-
-*(Add screenshots after deployment)*
 
 ## ⚙️ Getting Started
 

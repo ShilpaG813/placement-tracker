@@ -129,7 +129,7 @@ const handleUpdate = async (e) => {
         <div>
           <h1 className="text-2xl font-bold text-gray-800">Interview Reminders</h1>
           <p className="text-gray-500 text-sm mt-1">
-            You will get email reminders — 1 day before, 2 hours before, and 30 mins before each interview
+            Reminder system helps you track upcoming interviews
           </p>
         </div>
         <button

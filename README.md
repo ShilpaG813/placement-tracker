@@ -3,7 +3,7 @@
 A full-stack web application built for engineering students to manage their entire placement journey — track applications, get smart email reminders, and analyze performance through an analytics dashboard.
 
 ## 🌐 Live Demo
-🔗 [placement-tracker.vercel.app](https://placement-tracker.vercel.app) 
+🔗 [Live Demo](https://placement-tracker-pi-tawny.vercel.app)
 
 ## ✨ Features
 

@@ -1,6 +1,6 @@
 # 🎯 Smart Placement Tracker
 
-A full-stack web application built for engineering students to manage their entire placement journey — track applications, get smart email reminders, and analyze performance through an analytics dashboard.
+A full-stack web application built for engineering students to manage their entire placement journey — track applications and analyze performance through an analytics dashboard.
 
 ## 🌐 Live Demo
 🔗 [Live Demo](https://placement-tracker-pi-tawny.vercel.app)
@@ -10,7 +10,6 @@ A full-stack web application built for engineering students to manage their enti
 - 🔐 **JWT Authentication** — Secure register/login with token-based auth
 - 📋 **Application Tracker** — Add, update, filter and manage all job applications with round-wise tracking
 - 📊 **Analytics Dashboard** — Visual charts showing success rate, rejection rate, company-wise stats and smart insights
-- 🔔 **Smart Email Reminders** — Automated 3-stage email alerts (1 day before, 2 hours before, 30 mins before) using NodeMailer + Cron Jobs
 - 👤 **Profile Management** — Edit profile, skills, CGPA and resume link
 - 🔍 **Search & Filter** — Filter applications by status and search by company/role
 
@@ -22,14 +21,12 @@ A full-stack web application built for engineering students to manage their enti
 | Backend | Node.js, Express.js |
 | Database | MongoDB Atlas, Mongoose |
 | Auth | JWT, Bcrypt |
-| Email | NodeMailer, Node-Cron |
 | Deployment | Vercel (Frontend), Render (Backend) |
 
 ## 📸 Screenshots
 
 > Dashboard with analytics
 > Applications tracker
-> Interview reminders
 
 *(Add screenshots after deployment)*
 
@@ -105,6 +102,7 @@ placement-tracker/
 - 🤖 AI Mock Interview Assistant
 - 📈 CGPA Eligibility Checker
 - 🏆 Interview Experience Feed
+- 🔔 Smart Email Reminders — Email notification system
 
 ## 👩‍💻 Author
 **Shilpa G**

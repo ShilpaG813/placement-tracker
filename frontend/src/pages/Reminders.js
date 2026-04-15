@@ -33,19 +33,25 @@ const [editForm, setEditForm] = useState({
 
   useEffect(() => { fetchReminders(); }, []);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      await axios.post('https://placement-tracker-backend-76cz.onrender.com/api/reminders', form, { headers });
-      showToast('Reminder added!', 'success');
-      setShowForm(false);
-      setForm({ company: '', role: '', roundType: '', interviewDate: '', notes: '' });
-      fetchReminders();
-    } catch (err) {
-      console.error(err);
-    }
-  };
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  try {
+    const formattedDate = new Date(form.interviewDate);
 
+    await axios.post(
+      'https://placement-tracker-backend-76cz.onrender.com/api/reminders',
+      { ...form, interviewDate: formattedDate },
+      { headers }
+    );
+
+    showToast('Reminder added!', 'success');
+    setShowForm(false);
+    setForm({ company: '', role: '', roundType: '', interviewDate: '', notes: '' });
+    fetchReminders();
+  } catch (err) {
+    console.error(err);
+  }
+};
 const handleDelete = (id) => {
   setConfirmDelete(id);
 };
@@ -69,12 +75,6 @@ const confirmDeleteReminder = async () => {
   const diff = Math.round((interviewMidnight - todayMidnight) / (1000 * 60 * 60 * 24));
   return diff;
 };
-  // const getDaysLeft = (date) => {
-  //   const today = new Date();
-  //   const interview = new Date(date);
-  //   const diff = Math.ceil((interview - today) / (1000 * 60 * 60 * 24));
-  //   return diff;
-  // };
 
   const getDaysLeftColor = (days) => {
     if (days < 0) return 'bg-gray-100 text-gray-500';
@@ -108,7 +108,14 @@ const past = reminders.filter(r => new Date(r.interviewDate) <= new Date());
 const handleUpdate = async (e) => {
   e.preventDefault();
   try {
-    await axios.put('https://placement-tracker-backend-76cz.onrender.com/api/reminders/' + editId, editForm, { headers });
+    const formattedDate = new Date(editForm.interviewDate);
+
+    await axios.put(
+      'https://placement-tracker-backend-76cz.onrender.com/api/reminders/' + editId,
+      { ...editForm, interviewDate: formattedDate },
+      { headers }
+    );
+
     setEditId(null);
     fetchReminders();
   } catch (err) {

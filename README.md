@@ -13,6 +13,13 @@ A full-stack web application built for engineering students to manage their enti
 - 👤 **Profile Management** — Edit profile, skills, CGPA and resume link
 - 🔍 **Search & Filter** — Filter applications by status and search by company/role
 
+## 🧪 How to Use
+1. Open the Live Demo link
+2. Sign up using your email
+3. Add your interview details
+4. View upcoming and past interviews
+5. Edit or delete reminders anytime
+
 ## 🛠️ Tech Stack
 
 | Layer | Technology |
